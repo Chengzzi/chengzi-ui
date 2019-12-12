@@ -1,0 +1,79 @@
+{
+  "id": "1057579",
+  "name": "chengzzi-ui",
+  "font_family": "iconfont",
+  "css_prefix_text": "i-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "557021",
+      "name": "设置",
+      "font_class": "settings",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "637792",
+      "name": "上",
+      "font_class": "up",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "637814",
+      "name": "左",
+      "font_class": "left",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "689306",
+      "name": "下载",
+      "font_class": "download",
+      "unicode": "e823",
+      "unicode_decimal": 59427
+    },
+    {
+      "icon_id": "5134656",
+      "name": "橙子",
+      "font_class": "color-chengzi",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "5173378",
+      "name": "橙子",
+      "font_class": "chengzi",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "5517432",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e962",
+      "unicode_decimal": 59746
+    },
+    {
+      "icon_id": "6526423",
+      "name": "上传",
+      "font_class": "upload",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "7795323",
+      "name": "右",
+      "font_class": "right",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7795326",
+      "name": "下",
+      "font_class": "down",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    }
+  ]
+}
