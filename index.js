@@ -1,6 +1,5 @@
 import './lib/iconFont/iconfont.js'
 import './lib/iconFont/iconfont.css'
-import './lib/jquery.slim.min.js'
 import './css/commmon.css'
 
 

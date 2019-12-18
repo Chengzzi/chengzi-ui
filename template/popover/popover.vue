@@ -41,7 +41,7 @@ export default { //输出
     },
     destroyed() {
         //在组件关闭时候消除监听，避免内存泄露
-        $("body").off("click", this.documentClick);
+        document.body.removeEventListener("click",this.documentClick);
     },
     methods: {
         positionContent() {
@@ -73,12 +73,12 @@ export default { //输出
         },
         clickClose() {
             this.popShow = false;
-            $("body").off("click", this.documentClick);
+            document.body.removeEventListener("click",this.documentClick);
         },
         clickOpen() {
             this.popShow = true;
             this.positionContent();
-            $("body").on("click", this.documentClick);
+            document.body.addEventListener("click",this.documentClick);
         },
 
         popHover() {

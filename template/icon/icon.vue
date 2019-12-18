@@ -10,10 +10,10 @@
         props:{
             name:{},
             size:{
-                default: "normal",
+                default: "",
                 type: String,
                 validator(val){
-                    return ["normal","small","large","logo"].includes(val);
+                    return ["","small","large","logo"].includes(val);
                 }
             },
             color:{
@@ -28,9 +28,7 @@
                     colorfont:this.color,
                     iconfont:!this.color,
                     [`i-${this.name}`]:!this.color,
-                    small:this.size == "small",
-                    large:this.size == "large",
-                    logo:this.size == "logo",
+                    [`${this.size}`]: true
                 }
             }
         },

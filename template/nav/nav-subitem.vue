@@ -153,17 +153,15 @@ export default { //输出
 
 .title {
     padding: 10px 22px 10px 16px;
+    position: relative;
 }
-
-.horizontal .title-arrow {
+.cz-nav-subitem .title-arrow {
+    display: flex;
+    align-items: center;
     position: absolute;
-    top: 10px;
     right: 6px;
-}
-.vertical .title-arrow{
-    position: absolute;
-    top: 10px;
-    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .active .title {
     /*color: #FF9500;*/
