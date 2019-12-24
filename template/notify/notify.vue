@@ -1,14 +1,16 @@
 <template>
     <div class="cz-notify" :class="classes" @click="click">
-        <div class="notify-icon">
-            <cz-icon size="logo" name="chengzi1"></cz-icon>
+        <div class="notify-icon" v-if="type||iconName">
+            <cz-icon size="large" :name="myIconName"></cz-icon>
         </div>
         <div class="main-wrap">
             <div class="title"><b>{{title}}</b></div>
             <div v-if="htmlMessage" v-html="message" class="message"></div>
             <div v-else class="message">{{message}}</div>
         </div>
-        <div class="closeBtn" @click="close">x</div>
+        <div class="closeBtn" @click="close">
+            <cz-icon size="small" name="guanbi1"></cz-icon>
+        </div>
     </div>
 </template>
 <script>
@@ -17,6 +19,7 @@ export default { //输出
     data() {
         return {
             number: null,
+            myIconName:"info"
         }
     },
     props: {
@@ -25,11 +28,13 @@ export default { //输出
             type: Number
         },
         type:{
-            default: "",
             type: String,
             validator(val) {
                 return ["error", "warning", "info", "success"].includes(val);
             }
+        },
+        iconName:{
+            type: String
         },
         onClose:{
             default(){
@@ -51,17 +56,16 @@ export default { //输出
             default: "提示",
             type: String
         },
-        autoClose: {
-            default: true,
-            type: Boolean
-        },
         htmlMessage: {
             default: false,
             type: Boolean
         },
         closeDelay: {
             default: 2500,
-            type: Number
+            type: Number,
+            validator(val) {
+                return val >= 0;
+            }
         },
         offset: {
             default: 20,
@@ -118,10 +122,11 @@ export default { //输出
         }
     },
     created() {
-
+        if(this.iconName) this.myIconName = this.iconName;
+        if(this.type) this.myIconName = this.type=="info"?"info":`color-${this.type}`;
     },
     mounted() {
-        if (this.autoClose) setTimeout(() => { this.close() }, this.closeDelay);
+        if (this.closeDelay!==0) setTimeout(() => { this.close() }, this.closeDelay);
         this.setPosition();
     },
     computed: {
@@ -146,9 +151,9 @@ export default { //输出
     box-sizing: border-box;
     border: 1px solid #EBEEF5;
     background-color: #FFF;
-    animation: right-in .8s;
+    z-index: 1000;
+    box-shadow: 0 0 5px 0 rgba(188,188,188,.6), 0 2px 5px 0 rgba(188,188,188,.5);
 }
-
 @keyframes right-in {
     from {
         transform: translateX(100%);
@@ -173,18 +178,21 @@ export default { //输出
     }
 }
 
-.position-top-right,
-.position-bottom-right {
+.cz-notify.position-top-right,
+.cz-notify.position-bottom-right {
     right: 20px;
+    animation: right-in .8s;
 }
 
-.position-top-left,
-.position-bottom-left {
+.cz-notify.position-top-left,
+.cz-notify.position-bottom-left {
     left: 20px;
+    animation: left-in .8s;
 }
 
 .notify-icon {
     width: 40px;
+    color: #999;
 }
 
 .main-wrap {

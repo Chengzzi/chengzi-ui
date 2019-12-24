@@ -1,5 +1,5 @@
 <template>
-    <i :class="classes" v-if="!color" v-show="name"></i>
+    <i :class="classes" v-if="!name.includes('color')" v-show="name"></i>
     <svg :class="classes" v-else v-show="name">
         <use :xlink:href="`#i-${name}`"></use>
     </svg>
@@ -15,19 +15,15 @@
                 validator(val){
                     return ["","small","large","logo"].includes(val);
                 }
-            },
-            color:{
-                default: false,
-                type: Boolean,
-            },
+            }
         },
         computed: {
             classes(){
                 return{
                     icon:true,
-                    colorfont:this.color,
-                    iconfont:!this.color,
-                    [`i-${this.name}`]:!this.color,
+                    colorfont:this.name.includes("color"),
+                    iconfont:!this.name.includes("color"),
+                    [`i-${this.name}`]:!this.name.includes("color"),
                     [`${this.size}`]: true
                 }
             }

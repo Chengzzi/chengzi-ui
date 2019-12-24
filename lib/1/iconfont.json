@@ -246,7 +246,7 @@
     {
       "icon_id": "577359",
       "name": "设置",
-      "font_class": "settings",
+      "font_class": "shezhi",
       "unicode": "e74c",
       "unicode_decimal": 59212
     },
@@ -536,13 +536,6 @@
       "font_class": "download",
       "unicode": "e823",
       "unicode_decimal": 59427
-    },
-    {
-      "icon_id": "750881",
-      "name": "单品",
-      "font_class": "fenlei",
-      "unicode": "e7ab",
-      "unicode_decimal": 59307
     },
     {
       "icon_id": "750883",

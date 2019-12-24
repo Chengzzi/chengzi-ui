@@ -7,7 +7,7 @@
 export default {
     props: {
 
-    }, //传元素属性值
+    },
     mounted() {
         this.inspect();
     },
@@ -24,19 +24,26 @@ export default {
 };
 </script>
 <style>
+.cz-button-group{
+    display: inline-block;
+}
 .cz-button-group>.cz-button {
-    border-radius: 0;
+    border-radius: 0!important;
+}
+.cz-button-group>.cz-button:not(:last-child):not(:first-child) {
+    margin-right: -1px;
+    margin-left: -1px;
 }
 
 .cz-button-group>.cz-button:first-child {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    margin-right: -1px;
+    border-top-left-radius: 4px!important;
+    border-bottom-left-radius: 4px!important;
+    /*margin-right: -1px;*/
 }
 
 .cz-button-group>.cz-button:last-child {
-    margin-left: -1px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    /*margin-left: -1px;*/
+    border-top-right-radius: 4px!important;
+    border-bottom-right-radius: 4px!important;
 }
 </style>

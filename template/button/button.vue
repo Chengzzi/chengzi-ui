@@ -1,5 +1,5 @@
 <template>
-    <button :disabled="disabled" class="cz-button" :class="classes" @click="clickFun">
+    <button :disabled="disabled" :type="nativeType" class="cz-button" :class="classes" @click="clickFun">
         <cz-icon :name="icon" v-if="icon"></cz-icon>
         <slot></slot>
     </button>
@@ -13,6 +13,10 @@
                 type:Boolean,
                 default:false
             },
+            round:{
+                type:Boolean,
+                default:false
+            },
             iPosition:{
                 type:String,
                 default:"left",
@@ -22,15 +26,21 @@
             },
             type:{
                 type:String,
-                default:"",
                 validator(value){ 
-                    return ["","success","plain","danger"].includes(value)
+                    return ["success","guide","plain","danger"].includes(value)
                 }
             },
             size:{
                 type:String,
                 validator(value){ 
                     return ["large","small","mini"].includes(value);
+                }
+            },
+            nativeType:{
+                type:String,
+                default:"button",
+                validator(value){ 
+                    return ["button","submit","reset"].includes(value)
                 }
             }
         },  
@@ -47,6 +57,7 @@
                     [`${this.type}`]: this.type,
                     [`${this.size}`]: this.size,
                     "disabled": this.disabled,
+                    "round": this.round,
                     [`${this.iPosition}`]:this.iPosition
                 }
             },
@@ -81,7 +92,8 @@
 }
 .cz-button:hover:enabled{
     border:1px #e6a23c solid;
-    
+    position: relative;
+    z-index: 1;
 }
 .cz-button:active{
     color: #fff;
@@ -92,7 +104,11 @@
     background: #fff;
     border:1px #d3d4d6 solid; 
 }
-.cz-button.plain:hover:enabled{ border:1px #909399 solid; }
+.cz-button.plain:hover:enabled{
+    border:1px #909399 solid; 
+    position: relative;
+    z-index: 1;
+}
 .cz-button.plain:active{ 
     color: #fff;
     background: #909399; 
@@ -103,21 +119,43 @@
     background: #fef0f0;
     border:1px #fbc4c4 solid; 
 }
-.cz-button.danger:hover:enabled{ border:1px #f56c6c solid; }
+.cz-button.danger:hover:enabled{
+    border:1px #f56c6c solid; 
+    position: relative;
+    z-index: 1;
+}
 .cz-button.danger:active{ 
     color: #fff;
     background: #f56c6c; 
 }
-
 .cz-button.success{ 
     color:#67c23a;
     background: #f0f9eb;
     border:1px #c2e7b0 solid; 
 }
-.cz-button.success:hover:enabled{ border:1px #67c23a solid; }
+.cz-button.success:hover:enabled{
+    border:1px #67c23a solid; 
+    position: relative;
+    z-index: 1;
+}
 .cz-button.success:active{ 
     color: #fff;
     background: #67c23a; 
+}
+
+.cz-button.guide{ 
+    color:#409eff;
+    background: #ecf5ff;
+    border:1px #b3d8ff solid; 
+}
+.cz-button.guide:hover:enabled{
+    border:1px #409eff solid; 
+    position: relative;
+    z-index: 1;
+}
+.cz-button.guide:active{ 
+    color: #fff;
+    background: #409eff; 
 }
 
 .cz-button.large{
@@ -133,6 +171,9 @@
     padding: 7px 12px;
     font-size: 12px;
     border-radius: 3px;
+}
+.cz-button.round{
+    border-radius: 20px;
 }
 
 .cz-button:disabled{
