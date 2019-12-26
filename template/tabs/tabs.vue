@@ -43,6 +43,9 @@ export default { //输出
             // this.$emit("update:activeName",data);
             this.$emit("input",data);
         })
+        this.eventBus.$on("tab-click",(data)=>{
+            this.$emit("tab-click",data);
+        })
     },
     mounted() {
         this.$children.forEach((vm)=>{
@@ -51,7 +54,7 @@ export default { //输出
                 vm.$children.forEach((vm1)=>{   
                     if(vm1.name == this.value){
                         this.eventBus.$emit("update:activeName",this.value,vm1.$el);
-                        flag = true;
+                        hasValidName = true;
                     }
                 }) 
                 if(!hasValidName) {
@@ -63,7 +66,18 @@ export default { //输出
         // this.eventBus.$emit("update:type",this.type);
     },
     methods: {
-
+        openTab(name){
+            if(!name) return
+            this.$children.forEach((vm)=>{
+                if(vm.$options.name =="cz-tab-head"){
+                    vm.$children.forEach((vm1)=>{   
+                        if(vm1.name == name){
+                            this.eventBus.$emit("update:activeName",name,vm1.$el);
+                        }
+                    })   
+                }
+            })
+        }
     }
 };
 </script>

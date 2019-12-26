@@ -41,8 +41,8 @@ export default { //输出
         tabClick(){
             if(this.activeName != this.name){
                 this.eventBus.$emit("update:activeName",this.name,this.$el);
+                this.eventBus.$emit("tab-click",this);
             }
-            // this.$emit("tab-click",this.name);
         }
     }
 };
