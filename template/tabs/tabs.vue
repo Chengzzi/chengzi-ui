@@ -22,14 +22,15 @@ export default { //输出
     props: {
         value: {},
         type:{
-            default:"default",
-            type:String
+            type:String,
+            validator(value) { 
+                return ["card"].includes(value);
+            }
         }
     },
     computed: {
         classes(){
             return{
-                "cz-tabs-default":this.type == "default",
                 "cz-tabs-card":this.type == "card"
             }
         }
@@ -39,7 +40,8 @@ export default { //输出
     created() {
         this.eventBus.$on("update:activeName",(data,el)=>{
             //此处可替换成input，不需要:activeName.sync="active"
-            this.$emit("update:activeName",data);
+            // this.$emit("update:activeName",data);
+            this.$emit("input",data);
         })
     },
     mounted() {
@@ -64,9 +66,27 @@ export default { //输出
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cz-tabs{
-    
+    background: #fff;
 }
-
+.cz-tabs.cz-tabs-card{
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgba(188,188,188,.6), 0 1px 2px 0 rgba(188,188,188,.5);
+}
+.cz-tabs.cz-tabs-card >>> .cz-tab-head{
+    color:#909399;
+    background: #f5f7fa;
+}
+.cz-tabs.cz-tabs-card >>> .cz-tab-head .line{
+    display: none;
+}
+.cz-tabs.cz-tabs-card >>> .cz-tab-item.active{
+    margin:0 -1px 0px -1px;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    z-index: 1;
+    transition: all 0.3;
+}
 </style>
 <style>
 

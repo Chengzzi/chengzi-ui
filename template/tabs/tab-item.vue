@@ -56,5 +56,6 @@ export default { //输出
 }
 .cz-tab-item.active{
     color: var(--active-color);
+    background: #fff;
 }
 </style>

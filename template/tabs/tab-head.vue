@@ -1,6 +1,5 @@
 <template>
     <div class="cz-tab-head">
-
         <slot></slot>
         <div class="extra">
             <slot name="extra"></slot>
@@ -37,10 +36,12 @@ export default { //输出
 .cz-tab-head{
     display: flex;   
     position: relative;
-    
+    color: #333;
+    overflow: hidden;
 }
 .cz-tab-head .extra{
     margin-left: auto;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

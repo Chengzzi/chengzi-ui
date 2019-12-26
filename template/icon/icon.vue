@@ -10,10 +10,9 @@
         props:{
             name:{},
             size:{
-                default: "",
                 type: String,
                 validator(val){
-                    return ["","small","large","logo"].includes(val);
+                    return ["small","large","logo"].includes(val);
                 }
             }
         },

@@ -176,7 +176,7 @@ export default { //输出
 .pop-content.position-top:after {
     border-right: 1px solid #888;
     border-bottom: 1px solid #888;
-    bottom: -4px;
+    bottom: -3px;
     left: 10px;
     transform:rotate(45deg);
 }

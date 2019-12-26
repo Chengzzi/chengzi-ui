@@ -57,7 +57,7 @@ export default { //输出
                 return value === "text" || value === "textarea";
             }
         },
-        icon: { type: String },
+        icon: { default: "",type: String },
         maxlength: { type: [Number,String] },
         rows: { 
             default: "2",
