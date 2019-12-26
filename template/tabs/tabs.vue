@@ -24,7 +24,7 @@ export default { //输出
         type:{
             type:String,
             validator(value) { 
-                return ["card"].includes(value);
+                return ["default","card"].includes(value);
             }
         }
     },
@@ -47,23 +47,26 @@ export default { //输出
     mounted() {
         this.$children.forEach((vm)=>{
             if(vm.$options.name =="cz-tab-head"){
+                let hasValidName = false;
                 vm.$children.forEach((vm1)=>{   
                     if(vm1.name == this.value){
                         this.eventBus.$emit("update:activeName",this.value,vm1.$el);
-                    }else{
+                        flag = true;
                     }
-                })  
+                }) 
+                if(!hasValidName) {
+                    this.eventBus.$emit("update:activeName",vm.$children[0].name,vm.$children[0].$el);
+                }   
             }
         })
         // this.eventBus.$emit("update:activeName",this.value);
-        this.eventBus.$emit("update:type",this.type);
+        // this.eventBus.$emit("update:type",this.type);
     },
     methods: {
 
     }
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cz-tabs{
     background: #fff;
@@ -87,7 +90,4 @@ export default { //输出
     z-index: 1;
     transition: all 0.3;
 }
-</style>
-<style>
-
 </style>
