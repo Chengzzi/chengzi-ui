@@ -16,7 +16,9 @@ export default { //输出
             default:false,
             type: Boolean,
         },
-        value: {},
+        value: {
+            type:Array
+        },
     },
     data() {
         return {

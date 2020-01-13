@@ -34,6 +34,5 @@ export default { //输出
 <style scoped>
 .cz-body{
     flex-grow: 1;
-    border:1px solid black;
 }
 </style>

@@ -32,7 +32,4 @@ export default { //输出
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.cz-footer{
-    border:1px solid black;
-}
 </style>

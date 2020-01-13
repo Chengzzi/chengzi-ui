@@ -49,8 +49,8 @@ export default { //输出
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cz-container{
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     height: 100%;
 }
