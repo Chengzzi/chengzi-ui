@@ -114,8 +114,35 @@ export default { //输出
 .cz-counter{
     display: inline-block;
     position:relative;
-    width: 140px;
+    width: 160px;
     height: 36px;
+    border: 1px solid #DCDFE6;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.cz-counter.mini{
+    width: 130px;
+    height: 28px;
+}
+.cz-counter.mini>.counterBtn{
+    height: 28px;
+    line-height: 26px;
+}
+.cz-counter.small{
+    width: 140px;
+    height: 32px;
+}
+.cz-counter.small>.counterBtn{
+    height: 32px;
+    line-height: 30px;
+}
+.cz-counter.large{
+    width: 170px;
+    height: 40px;
+}
+.cz-counter.large>.counterBtn{
+    height: 40px;
+    line-height: 38px;
 }
 .counterInput{
     padding: 0 30px;
@@ -127,23 +154,23 @@ export default { //输出
     display: inline-block;
     font-size: inherit;
     outline: 0;
-    border: 1px solid #DCDFE6;
+    border: none;
     text-align: center;
-    border-radius: 5px;
 }
-.cz-counter:hover .counterInput{
-    border: 1px solid var(--active-color);
+.cz-counter:hover{
+    border: 1px solid #aba;
 }
 .counterBtn{
     position: absolute;
     top: 0;
     cursor: pointer;
-    height: 100%;
+    height: 36px;
     width: 30px;
-    line-height: 36px;
+    line-height: 34px;
     text-align: center;
     font-size: 18px;
     user-select: none; 
+    background: #e9eef3;
 }
 .counterBtn:hover{
     color: var(--active-color);

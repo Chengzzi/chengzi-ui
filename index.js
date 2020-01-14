@@ -25,6 +25,7 @@ import CollapseItem from './template/collapse/collapse-item.vue'
 import Nav from './template/nav/nav.vue'
 import NavItem from './template/nav/nav-item.vue'
 import NavSubitem from './template/nav/nav-subitem.vue'
+import Counter from './template/counter/counter.vue'
 
 import notifyPlugin from './template/notify/notifyPlugin.js'
 
@@ -52,6 +53,7 @@ const chengziUI = {
     Vue.component('cz-nav', Nav);
     Vue.component('cz-nav-item', NavItem);
     Vue.component('cz-nav-subitem', NavSubitem);
+    Vue.component('cz-counter', Counter);
 
     Vue.prototype.$czNotify = notifyPlugin(Vue);
   }
