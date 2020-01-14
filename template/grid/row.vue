@@ -34,7 +34,8 @@ export default { //输出
         rowStyle(){
             let {gutter} = this;
             let rowStyle = {
-                margin:'0 '+(-gutter/2)+'px'
+                "margin-left":(-gutter/2)+'px',
+                "margin-right":(-gutter/2)+'px'
             };
             return rowStyle
         },
@@ -42,7 +43,7 @@ export default { //输出
             let {align,alignY} = this;
             let rowClass = {
                 [`align-${align}`]:align,
-                [`alignY-${align}`]:alignY
+                [`alignY-${alignY}`]:alignY
             };
             return rowClass
         }
@@ -74,5 +75,14 @@ export default { //输出
 }
 .align-center{
     justify-content: center;
+}
+.alignY-top{
+    align-items: flex-start;
+}
+.alignY-bottom{
+    align-items: flex-end;
+}
+.alignY-center{
+    align-items: center;
 }
 </style>
