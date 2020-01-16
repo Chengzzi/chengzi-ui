@@ -97,6 +97,9 @@ export default { //输出
 .cz-tabs.cz-tabs-card >>> .cz-tab-head .line{
     display: none;
 }
+.cz-tabs.cz-tabs-card >>> .cz-tab-item:first-child{
+    border-top-left-radius: 4px;
+}
 .cz-tabs.cz-tabs-card >>> .cz-tab-item.active{
     margin:0 -1px 0px -1px;
     border-left:1px solid #ddd;

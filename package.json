@@ -24,5 +24,7 @@
     "url": "https://github.com/Chengzzi/chengziUI/issues"
   },
   "homepage": "https://github.com/Chengzzi/chengziUI#readme",
-  "dependencies": {}
+  "dependencies": {
+    "velocity-animate": "^1.2.3"
+  }
 }

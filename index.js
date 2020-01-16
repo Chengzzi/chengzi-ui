@@ -1,7 +1,7 @@
+import 'velocity-animate'
 import './lib/iconFont/iconfont.js'
 import './lib/iconFont/iconfont.css'
 import './css/commmon.css'
-
 
 import Button from './template/button/button.vue'
 import ButtonGroup from './template/button/button-group.vue'

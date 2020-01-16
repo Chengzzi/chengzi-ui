@@ -5,9 +5,13 @@
             <div class="head-arrow" v-show="active"><cz-icon name="down"></cz-icon></div>
             <div class="head-arrow" v-show="!active"><cz-icon name="right"></cz-icon></div>
         </div>
-        <div class="collapse-content" v-show="active">
-            <slot></slot>
-        </div>
+        <transition name="content">
+            <div class="collapse-content-wrap" v-if="active">
+                <div class="collapse-content">
+                    <slot></slot>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -52,7 +56,7 @@ export default { //输出
     },
     computed: {
         classes(){
-            return {active:this.active}
+            return { active:this.active }
         }
     },
     watch: {
@@ -77,8 +81,24 @@ export default { //输出
 .head-arrow {
     margin-left: auto;
 }
+.collapse-content-wrap{
+    overflow: hidden;
+    max-height: 200px;
+}
 .collapse-content{
     border-top:1px solid #eee;
+    height: 100%;
+    box-sizing: border-box;
     padding: 10px;
+}
+
+.content-enter-active,
+.content-leave-active {
+    transition: all 2s;
+}
+
+.content-enter,
+.content-leave-to {
+    max-height: 0px;
 }
 </style>
