@@ -2,18 +2,24 @@
     <div class="cz-nav-subitem" @mouseenter="subMouseEvent" @mouseleave="subMouseEvent" :class="classes">
         <div class="title" @click="subClick" :style="styles" @mouseenter="hoverMouseEvent" @mouseleave="hoverMouseEvent">
             <slot name="title"></slot>
-            <div class="title-arrow" v-show="spread">
-                <cz-icon size="small" name="down"></cz-icon>
-            </div>
-            <div class="title-arrow" v-show="!spread">
+            <div class="title-arrow" :class="{active:spread}">
                 <cz-icon size="small" name="right"></cz-icon>
             </div>
         </div>
         
-        <transition :name="mode">
-            <div class="childItem" v-show="spread">
-                <slot></slot>
-            </div>
+        <transition 
+            appear
+            v-on:appear="appear"
+            v-on:appear-cancelled="appearCancelled"
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:before-leave="beforeLeave"
+            v-on:leave="leave"
+            v-bind:css="false"
+            :name="mode">
+                <div ref="childItem" class="childItem" v-show="spread">
+                    <slot></slot>
+                </div>
         </transition>
     </div>
 </template>
@@ -24,7 +30,7 @@ export default { //输出
         return {
             childrenNames: [],
             activeName: "",
-            spread: false,
+            spread: true,
             hover: false,
             mode: null,
             trigger: null,
@@ -32,6 +38,8 @@ export default { //输出
             textColor: null,
             activeTextColor: null,
             defaultOpeneds: [],
+            childHeight: null,
+            firstClose: true,
 
         }
     },
@@ -76,6 +84,39 @@ export default { //输出
         closeChild() {
             this.spread = false;
             this.eventBus.$emit("close:subitem", this.name);
+        },
+
+        appear(el, done){
+            this.childHeight = window.getComputedStyle(el).height;
+            el.style.opacity = 1;
+        },
+        appearCancelled(el) {},
+        beforeEnter(el) {
+            el.style.opacity = 0;
+        },
+        enter(el, done) {
+            Velocity(
+                el, 
+                { height: this.childHeight,opacity: 1}, 
+                { duration: 300 }, 
+                { complete: done },
+                "linear"
+            );
+        },
+        beforeLeave(el) {
+            this.childHeight = window.getComputedStyle(el).height;
+        },
+        leave(el, done) {
+            if(this.firstClose){
+                this.firstClose = false;
+                done();
+            }
+            Velocity(el, 
+                { height: 0,opacity: 0},
+                { duration: 300 }, 
+                { complete: done },
+                "linear"
+            );
         }
     },
     created() {
@@ -98,6 +139,7 @@ export default { //输出
 
             if (this.defaultOpeneds.includes(this.name)) {
                 this.spread = true;
+                this.firstClose = false;
             }
             if (data.mode == "horizontal" && data.trigger == "hover") {
                 this.trigger = "hover";
@@ -108,6 +150,8 @@ export default { //输出
         })
     },
     mounted() {
+        this.spread = false;
+        // this.childHeight = window.getComputedStyle(this.$refs.childItem).height;
         this.$children.forEach((vm) => {
             if(vm.$options.name !="cz-icon") this.childrenNames.push(vm.name);
         })
@@ -161,12 +205,12 @@ export default { //输出
     position: absolute;
     right: 6px;
     top: 50%;
+    transition: all .3s;
     transform: translateY(-50%);
 }
-.active .title {
-    /*color: #FF9500;*/
+.title-arrow.active {
+    transform:rotate(90deg) translateX(-50%);
 }
-
 .childItem {
     overflow: hidden;
 }
@@ -186,7 +230,7 @@ export default { //输出
     padding-left: 10px;
 }
 
-.vertical-enter-active,
+/*.vertical-enter-active,
 .vertical-leave-active {
     transition: all .5s;
 }
@@ -205,5 +249,5 @@ export default { //输出
 .horizontal-enter,
 .horizontal-leave-to {
     opacity: 0;
-}
+}*/
 </style>

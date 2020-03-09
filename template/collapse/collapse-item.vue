@@ -2,10 +2,13 @@
     <div class="cz-collapse-item" :class="classes">
         <div class="collapse-head" @click="headClick">
             <div class="head-title">{{title}}</div>
-            <div class="head-arrow" v-show="active"><cz-icon name="down"></cz-icon></div>
-            <div class="head-arrow" v-show="!active"><cz-icon name="right"></cz-icon></div>
+            <div class="head-arrow" :class="{active:active}"><cz-icon name="right"></cz-icon></div>
         </div>
-        <transition name="content">
+        <transition
+        v-on:before-enter="beforeEnter"
+        v-on:enter="enter"
+        v-on:leave="leave"
+        >
             <div class="collapse-content-wrap" v-if="active">
                 <div class="collapse-content">
                     <slot></slot>
@@ -40,6 +43,27 @@ export default { //输出
             }else{
                 this.eventBus.$emit("update:addName", this.name);
             }
+        },
+        beforeEnter: function(el) {
+            el.style.opacity = 0;
+        },
+        enter: function(el, done) {
+            let endWidth = window.getComputedStyle(el).height;
+            el.style.height = '0px';
+            Velocity(
+                el, 
+                { height: endWidth,opacity: 1}, 
+                { duration: 300 }, 
+                { complete: done }
+            );
+        },
+        leave: function(el, done) {
+            
+            Velocity(el, 
+                { height: 0,opacity: 0},
+                { duration: 300 }, 
+                { complete: done }
+            );
         }
     },
     created() {
@@ -80,6 +104,10 @@ export default { //输出
 
 .head-arrow {
     margin-left: auto;
+    transition: all .3s;
+}
+.head-arrow.active{
+    transform:rotate(90deg);
 }
 .collapse-content-wrap{
     overflow: hidden;
