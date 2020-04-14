@@ -8,10 +8,6 @@ import Vue from "vue"
 export default { //输出
     name: "cz-collapse", 
     props: {
-        title: {
-            default:"",
-            type: String,
-        },
         accordion:{
             default:false,
             type: Boolean,
@@ -60,9 +56,7 @@ export default { //输出
         })
     },
     mounted() {
-        if(Array.isArray(this.value)) {
-            this.eventBus.$emit("update:activeName",this.value);
-        }else{  
+        if(!Array.isArray(this.value)){  
             console.error("组件collapse的value必须为Array")
         }
     },

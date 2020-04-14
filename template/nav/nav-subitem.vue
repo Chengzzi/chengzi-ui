@@ -2,7 +2,7 @@
     <div class="cz-nav-subitem" @mouseenter="subMouseEvent" @mouseleave="subMouseEvent" :class="classes">
         <div class="title" @click="subClick" :style="styles" @mouseenter="hoverMouseEvent" @mouseleave="hoverMouseEvent">
             <slot name="title"></slot>
-            <div class="title-arrow" :class="{active:spread}">
+            <div class="title-arrow" ref="arrow" :class="{active:spread}">
                 <cz-icon size="small" name="right"></cz-icon>
             </div>
         </div>

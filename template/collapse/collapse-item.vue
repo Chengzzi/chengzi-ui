@@ -74,6 +74,11 @@ export default { //输出
                 this.active = false;
             }
         })
+        if (this.$parent.value.indexOf(this.name)> -1) {
+            this.active = true;
+        } else {
+            this.active = false;
+        }
     },
     mounted() {
 
@@ -111,16 +116,16 @@ export default { //输出
 }
 .collapse-content-wrap{
     overflow: hidden;
-    max-height: 200px;
+    /*max-height: 200px;*/
 }
+
 .collapse-content{
     border-top:1px solid #eee;
     height: 100%;
     box-sizing: border-box;
     padding: 10px;
 }
-
-.content-enter-active,
+/*.content-enter-active,
 .content-leave-active {
     transition: all 2s;
 }
@@ -128,5 +133,5 @@ export default { //输出
 .content-enter,
 .content-leave-to {
     max-height: 0px;
-}
+}*/
 </style>
