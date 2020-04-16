@@ -1,6 +1,6 @@
 <template>
     <transition name="carouselItem">
-        <div v-if="active" class="cz-carousel-item" :class="{reserve}">
+        <div v-if="active" class="cz-carousel-item" :class="{reserve,appear}">
             <slot></slot>
         </div>
     </transition>
@@ -39,7 +39,9 @@
 .carouselItem-enter{
     transform: translateX(100%);
 }
-
+.carouselItem-enter.appear{
+    transform: translateX(0);
+}
 .carouselItem-leave{
     position: absolute;
     top:0;

@@ -2,20 +2,21 @@
     <div class="cz-carousel" @mouseover="toggleAutoPlay(false)" @mouseout="toggleAutoPlay(true)">
         <div class="carousel-wrap">
             <slot></slot>
+            <div :class="{autoHide}" class="carousel-btn next-btn" v-if="arrow" @click="nextPlay">
+                <cz-icon name="right" size="small"></cz-icon>
+            </div>
+            <div :class="{autoHide}" class="carousel-btn last-btn" v-if="arrow" @click="lastPlay">
+                <cz-icon name="left" size="small"></cz-icon>
+            </div>
         </div>
         <div class="carousel-point-wrap" v-if="pointPosition != 'none'" :class="{[`${pointPosition}`]:true}">
-            <ul class="carousel-point">
+            <ul class="carousel-point" :class="{autoHide}">
                 <li v-for="(item,index) in names" :key="index" 
                 :class="{active:activeIndex == index}"
-                @[trigger]="goTo(index);"></li>
+                @[trigger]="goToByIndex(index);"></li>
             </ul>
         </div>
-        <div class="carousel-btn next-btn" v-if="arrow" @click="nextPlay">
-            <cz-icon name="right" size="small"></cz-icon>
-        </div>
-        <div class="carousel-btn last-btn" v-if="arrow" @click="lastPlay">
-            <cz-icon name="left" size="small"></cz-icon>
-        </div>
+        
     </div>
 </template>
 <script>
@@ -35,11 +36,15 @@
             activeName:{},
             autoPlay:{
                 type:Boolean,
-                default:true
+                default:false
             },
             interval:{
                 type:Number,
                 default:3000
+            },
+            height:{
+                type:Number,
+                default:200
             },
             trigger:{
                 type:String,
@@ -50,7 +55,7 @@
             },
             pointPosition:{
                 type:String,
-                default:'none',
+                default:'inside',
                 validator(value) { 
                     return ["inside","none","outside"].includes(value)
                 }
@@ -58,6 +63,10 @@
             arrow:{
                 type:Boolean,
                 default:true
+            },
+            autoHide:{
+                type:Boolean,
+                default:false
             },
         },
         computed:{
@@ -90,6 +99,7 @@
                         this.btnToggle.use = false;
                     })
                 })
+                this.$emit("carousel-change",activeName);
             },
             autoPlayFun(){
                 const run = ()=>{
@@ -106,7 +116,7 @@
                     use:true,
                     reserve:false
                 }
-                this.goTo(index);
+                this.goToByIndex(index);
             },
             lastPlay(){
                 let index = this.activeIndex;
@@ -116,13 +126,16 @@
                     use:true,
                     reserve:true
                 }
-                this.goTo(index);
+                this.goToByIndex(index);
             },
-            goTo(index){
+            goToByIndex(index){
                 this.$emit("update:activeName",this.names[index]);
             },
+            goToByName(name){
+                this.$emit("update:activeName",name);
+            },
             toggleAutoPlay(flag){
-                this.autoPlay = flag;
+                if(!this.autoPlay)return
                 if(flag){
                     this.autoPlayFun();
                 }else{
@@ -141,7 +154,6 @@
     overflow: hidden;
     position: relative;
     display: flex;
-    border: 1px solid #000;
 }
 .carousel-point-wrap.outside{
     position: relative;
@@ -157,7 +169,6 @@
     transform: translateX(-50%);
     padding: 0;
     transition: all .5s;
-    opacity: 0;
 }
 
 .carousel-point>li{
@@ -192,7 +203,7 @@
     justify-content: center;
     align-items: center;
     transition: all .5s;
-    opacity: 0;
+    opacity: .4;
     width: 30px;
     height: 30px;
     background: #444;
@@ -201,6 +212,11 @@
     color: #fff;
     top: 50%;
     cursor: pointer;
+}
+.carousel-point.autoHide,
+.carousel-btn.autoHide
+{
+    opacity: 0;
 }
 .cz-carousel:hover .carousel-btn{
    opacity: .4; 
