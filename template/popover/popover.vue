@@ -34,14 +34,18 @@ export default { //输出
             validator(value) { //输入值合法检查
                 return value === "light" || value === "dark";
             }
-        }
+        },
+        selectPop:{
+            type:Boolean,
+            default:false
+        },
     },
     data() {
         return {
             hoverTimeout: null,
             popShow: false,
             eventclick: { click: this.popClick },
-            eventhover: { mouseover: this.hoverOpen, mouseout: this.hoverClose }
+            eventhover: { mouseenter: this.hoverOpen, mouseleave: this.hoverClose }
         }
     },
     computed: {
@@ -58,15 +62,10 @@ export default { //输出
         classes(){
             return {
                 [`position-${this.position}`]:true,
-                [`${this.type}`]:true
+                [`${this.type}`]:true,
+                selectPop:this.selectPop
             }
         }
-    },
-    created() {
-
-    },
-    mounted() {
-
     },
     destroyed() {
         //在组件关闭时候消除监听，避免内存泄露
@@ -122,7 +121,7 @@ export default { //输出
             this.$emit("close");
             document.body.removeEventListener("click",this.documentClick);
         },
-        hoverClose() {
+        hoverClose(e) {
             this.hoverTimeout = setTimeout(()=>{
                 this.popShow = false;
                 this.$emit("close");
@@ -136,11 +135,11 @@ export default { //输出
             })
             document.body.addEventListener("click",this.documentClick);
         },
-        hoverOpen() {
+        hoverOpen(e) {
+            this.popShow = true;
             if(this.hoverTimeout){
                 clearTimeout(this.hoverTimeout);
             }
-            this.popShow = true;
             this.$emit("open");
             this.$nextTick(() => {
                 this.positionContent();
@@ -163,11 +162,13 @@ export default { //输出
     border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(188,188,188,.6), 0 2px 3px 0 rgba(188,188,188,.5);
 }
+.pop-content.selectPop{
+    padding: 0;
+}
 
 .pop-content:after {
     content: '';
     display: block;
-    
     width: 5px;
     height: 5px;
     background: #fff;
@@ -200,6 +201,9 @@ export default { //输出
     right: -4px;
     top: 14px;
     transform:rotate(45deg);
+}
+.pop-content.selectPop:after {
+    opacity: 0;
 }
 .pop-content.dark:after{
     border:none;

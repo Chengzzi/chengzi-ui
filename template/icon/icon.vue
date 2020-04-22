@@ -23,7 +23,7 @@
                     colorfont:this.name.includes("color"),
                     iconfont:!this.name.includes("color"),
                     [`i-${this.name}`]:!this.name.includes("color"),
-                    [`${this.size}`]: true
+                    [`${this.size}`]: this.size
                 }
             }
         },

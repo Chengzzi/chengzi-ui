@@ -1,7 +1,7 @@
 <template>
     <div class="cz-input" :style="inputStyle" :class="classes">
         <div v-if="type=='text'" class="input-icon">
-            <cz-icon :name="icon"></cz-icon>
+            <cz-icon size="small" :name="icon"></cz-icon>
         </div>
         <input
         ref="text" 
@@ -253,7 +253,7 @@ export default { //输出
 .cz-input .input-icon {
     display: inline-block;
     position: absolute;
-    top: 50%;
+    top: calc(50% - 2px);
     left: 5px;
     transform: translateY(-50%);
 }

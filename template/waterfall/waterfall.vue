@@ -9,22 +9,25 @@
     export default {
         name: "cz-waterfall", 
         props:{
-            datas:{
-                type:Array,
-                default(){
-                    return []
-                }
-            },
             width:{
-                type:Number
+                type:Number,
+                validator(value) {
+                    return value > 0;
+                }
             },
             height:{
                 type:Number,
-                default:400
+                default:400,
+                validator(value) {
+                    return value > 0;
+                }
             },
             reachBottomDistance:{
                 type:Number,
-                default:30
+                default:30,
+                validator(value) {
+                    return value > 0;
+                }
             },
             reachBottomInterval:{
                 type:Number,
