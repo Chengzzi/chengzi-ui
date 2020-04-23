@@ -11,11 +11,14 @@
         >
             <template #content>
                 <div class="options" ref="options">
+                    <div v-if="allSelect" class="allSelect">
+                        <cz-checkbox @change="allSelectClick" v-model="allSelected" label="全选"></cz-checkbox>
+                    </div>
                     <slot></slot>
                 </div>
             </template>
             <div class="select-input" ref="selectInput">
-                <cz-input readonly border-style="none" :value="inputValue" i-position="right" :icon="iconName"></cz-input>
+                <cz-input :width="width" readonly border-style="none" :value="inputValue" i-position="right" :icon="iconName"></cz-input>
                 <div class="multiple"></div>
             </div>
         </cz-popover> 
@@ -41,6 +44,10 @@
             value:{
                 type:[String, Array, Number]
             },
+            allSelect:{
+                type:Boolean,
+                default:false
+            },
             trigger: {
                 default: "click",
                 type: String,
@@ -53,8 +60,8 @@
             return{
                 iconName:"down",
                 eventBus: new Vue(),
-                selectArray:[],
-                allOptions:[]
+                optionGroup:[],
+                allSelected:false
             }
         },
         provide() {
@@ -63,23 +70,22 @@
             }
         },
         mounted(){
-            this.$refs.selectInput.style.width = this.width+"px";
             this.$refs.select.style.width = this.width+"px";
             this.$refs.options.style.width = (this.width-2)+"px";
             this.$children[0].$children.forEach(item=>{
                 if(item.$options.name === "cz-select-option"){
-                    this.allOptions.push(item.value);
+                    this.optionGroup.push(item.value);
                 }
             })
             if(this.multiple){
                 let arr = [];
                 this.value.forEach((item,index)=>{
-                    if(this.allOptions.includes(item)) arr.push(item)
+                    if(this.optionGroup.includes(item)) arr.push(item)
                 })
                 this.sendBus(arr);
             }else {
-                if(!this.allOptions.includes(this.value)){
-                    this.sendBus(this.allOptions[0]);
+                if(!this.optionGroup.includes(this.value)){
+                    this.sendBus(this.optionGroup[0]);
                 }else{
                     this.eventBus.$emit("update:selected",this.value);
                 }
@@ -89,29 +95,43 @@
         created(){
             this.eventBus.$on("select",(data)=>{
                 if(this.multiple){
-                    this.selectArray = [...this.value];
-                    if(this.selectArray.includes(data)){
-                        this.selectArray.splice(this.selectArray.indexOf(data), 1);
+                    let selectArray = [...this.value];
+                    if(selectArray.includes(data)){
+                        selectArray.splice(selectArray.indexOf(data), 1);
                     }else{
-                        this.selectArray.push(data);
+                        selectArray.push(data);
                     }
-                    this.sendBus(this.selectArray);
+                    this.sendBus(selectArray);
                 }else{
                     this.$refs.selectPop.clickClose();
                     this.sendBus(data);
                 }
             });
 
-            let validation =  this.multiple? Array.isArray(this.value) : (typeof this.value === "string"||typeof this.value === "number");
-            if(!validation){
-                let str = this.multiple? "Array" : "String或者Number";
-                console.error(`cz-select的值应当为${str}类型`);
-            }
+            this.validate();
         },
         methods: {
             sendBus(data){
                 this.$emit("input",data);
                 this.eventBus.$emit("update:selected",data);
+            },
+            validate(){
+                let validation1 =  this.multiple? Array.isArray(this.value) : (typeof this.value === "string"||typeof this.value === "number");
+                if(!validation1){
+                    let str = this.multiple? "Array" : "String或者Number";
+                    console.error(`cz-select的绑定值应当为${str}类型`);
+                }
+
+                if(this.allSelect && !this.multiple){
+                    console.error(`cz-select必须设定为多选(multiple)才能设定全选(allSelect)`);
+                }
+            },
+            allSelectClick(data){
+                if(data){
+                    this.sendBus(this.optionGroup);
+                }else{
+                    this.sendBus([]);
+                }
             }
         },
         computed:{
@@ -123,6 +143,21 @@
                     }
                 }
                 return val
+            },
+            // allSelected(){
+            //     if(this.allSelect&&this.multiple&&this.optionGroup&&this.optionGroup.length>0){
+            //         return this.value.length == this.optionGroup.length
+            //     }else{
+            //         return false
+            //     }
+            // }
+            // allSelected was assigned to but it has no setter.
+        },
+        watch:{
+            value(val){
+                if(this.allSelect&&this.multiple&&this.optionGroup&&this.optionGroup.length>0){
+                    this.allSelected = (val.length == this.optionGroup.length);
+                }
             }
         }
     };
@@ -158,5 +193,9 @@
 }
 .options::-webkit-scrollbar-button {
     display: none;
+}
+.allSelect{
+    padding: 4px 8px;
+    color: #333;
 }
 </style>

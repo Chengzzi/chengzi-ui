@@ -58,7 +58,7 @@
                     [`${this.size}`]: this.size,
                     "disabled": this.disabled,
                     "round": this.round,
-                    [`${this.iPosition}`]:this.iPosition
+                    [`${this.iPosition}`]:this.iPosition ==='right'
                 }
             },
             styles(){
@@ -180,7 +180,7 @@
     cursor: not-allowed;
     opacity: 0.6;
 }
-.cz-button.left >>> .icon{
+.cz-button >>> .icon{
     order: -1;
 }
 .cz-button.right >>> .icon{

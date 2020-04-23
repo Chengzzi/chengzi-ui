@@ -158,7 +158,7 @@ export default { //输出
     position: absolute;
     padding: 8px;
     background: #fff;
-    border: 1px solid #888;
+    border: 1px solid #EBEEF5;
     border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(188,188,188,.6), 0 2px 3px 0 rgba(188,188,188,.5);
 }
@@ -175,29 +175,29 @@ export default { //输出
     position: absolute;
 }
 .pop-content.position-top:after {
-    border-right: 1px solid #888;
-    border-bottom: 1px solid #888;
+    border-right: 1px solid #EBEEF5;
+    border-bottom: 1px solid #EBEEF5;
     bottom: -3px;
     left: 10px;
     transform:rotate(45deg);
 }
 .pop-content.position-bottom:after {
-    border-left: 1px solid #888;
-    border-top: 1px solid #888;
+    border-left: 1px solid #EBEEF5;
+    border-top: 1px solid #EBEEF5;
     top: -4px;
     left: 10px;
     transform:rotate(45deg);
 }
 .pop-content.position-right:after {
-    border-left: 1px solid #888;
-    border-bottom: 1px solid #888;
+    border-left: 1px solid #EBEEF5;
+    border-bottom: 1px solid #EBEEF5;
     left: -4px;
     top: 14px;
     transform:rotate(45deg);
 }
 .pop-content.position-left:after {
-    border-top: 1px solid #888;
-    border-right: 1px solid #888;
+    border-top: 1px solid #EBEEF5;
+    border-right: 1px solid #EBEEF5;
     right: -4px;
     top: 14px;
     transform:rotate(45deg);

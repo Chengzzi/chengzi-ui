@@ -185,7 +185,7 @@ export default { //输出
     border:none;
     outline:none;
     line-height: 26px;
-    border:1px solid var(--tinge-color);
+    border:1px solid #ccc;
     border-radius: 3px;
     color: #606266;
     padding: 3px;
@@ -228,13 +228,13 @@ export default { //输出
 .cz-input.border-none>input:focus,
 .cz-input.border-none>textarea:focus{
     box-shadow: none;
-    border:1px solid var(--tinge-color);
+    border:1px solid #ccc;
 }
 .cz-input.readonly>input:hover:enabled,
 .cz-input.readonly>textarea:hover:enabled,
 .cz-input.border-none>input:hover:enabled,
 .cz-input.border-none>textarea:hover:enabled{
-    border:1px solid var(--tinge-color);
+    border:1px solid #ccc;
 }
 .cz-input>input:disabled,
 .cz-input>textarea:disabled{
