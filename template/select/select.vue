@@ -32,7 +32,7 @@
         props:{
             width:{
                 type:Number,
-                default:240,
+                default:200,
                 validator(value) { //输入值合法检查
                     return value > 0;
                 }
@@ -61,6 +61,7 @@
                 iconName:"down",
                 eventBus: new Vue(),
                 optionGroup:[],
+                labelGroup:{},
                 allSelected:false
             }
         },
@@ -69,49 +70,34 @@
                 eventBus: this.eventBus,
             }
         },
+        // updated(){
+        //     this.selectInit();
+        // },
         mounted(){
-            this.$refs.select.style.width = this.width+"px";
-            this.$refs.options.style.width = (this.width-2)+"px";
-            this.$children[0].$children.forEach(item=>{
-                if(item.$options.name === "cz-select-option"){
-                    this.optionGroup.push(item.value);
-                }
-            })
-            if(this.multiple){
-                let arr = [];
-                this.value.forEach((item,index)=>{
-                    if(this.optionGroup.includes(item)) arr.push(item)
-                })
-                this.sendBus(arr);
-            }else {
-                if(!this.optionGroup.includes(this.value)){
-                    this.sendBus(this.optionGroup[0]);
-                }else{
-                    this.eventBus.$emit("update:selected",this.value);
-                }
-            }
-            
+            this.selectInit();
         },
         created(){
             this.eventBus.$on("select",(data)=>{
                 if(this.multiple){
                     let selectArray = [...this.value];
-                    if(selectArray.includes(data)){
-                        selectArray.splice(selectArray.indexOf(data), 1);
+                    if(selectArray.includes(data.value)){
+                        selectArray.splice(selectArray.indexOf(data.value), 1);
                     }else{
-                        selectArray.push(data);
+                        selectArray.push(data.value);
                     }
                     this.sendBus(selectArray);
                 }else{
+                    if(data.value == this.value) return
                     this.$refs.selectPop.clickClose();
-                    this.sendBus(data);
+                    this.sendBus(data.value);
                 }
             });
 
             this.validate();
         },
         methods: {
-            sendBus(data){
+            sendBus(data,init){
+                if(!init) this.$emit("change",data);
                 this.$emit("input",data);
                 this.eventBus.$emit("update:selected",data);
             },
@@ -132,15 +118,50 @@
                 }else{
                     this.sendBus([]);
                 }
+            },
+            selectInit(){
+                this.optionGroup = [];
+                this.labelGroup = {};
+                this.$refs.select.style.width = this.width+"px";
+                this.$refs.options.style.width = (this.width-2)+"px";
+
+                this.$children[0].$children.forEach(item=>{
+                    if(item.$options.name === "cz-select-option"){
+                        this.optionGroup.push(item.value);
+                        this.labelGroup[item.value] = item.label;
+                    }
+                })
+                if(this.multiple){
+                    let arr = [];
+                    this.value.forEach((item,index)=>{
+                        if(this.optionGroup.includes(item)) arr.push(item)
+                    })
+                    if(arr.length>0){
+                        this.sendBus(arr,true);
+                    }else{
+                        this.sendBus([this.optionGroup[0]],true);
+                    }
+                }else {
+                    if(!this.optionGroup.includes(this.value)){
+                        this.sendBus(this.optionGroup[0],true);
+                    }else{
+                        this.eventBus.$emit("update:selected",this.value);
+                    }
+                }
             }
         },
         computed:{
             inputValue(){
                 let val = this.value;
-                if(Array.isArray(val)){
-                    if(val.length>3){
-                        val = `${val[0]},${val[1]},${val[2]} 等${val.length-3}项`
+                if(this.multiple){
+                    val = val.map(item=>{
+                        return this.labelGroup[item]
+                    })
+                    if(val.length>2){
+                      val = `${val[0]},${val[1]} 等${val.length-2}条`  
                     }
+                }else{
+                    val = this.labelGroup[val];
                 }
                 return val
             },

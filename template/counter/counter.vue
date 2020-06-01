@@ -58,7 +58,7 @@ export default { //输出
             }
         },
         counter(value){
-            if(this.validator(value)){
+            if(this.validate(value)){
                 if (this.myValue != Number(value)) {
                     this.$emit('change', Number(value));
                 }
@@ -76,7 +76,7 @@ export default { //输出
                 }
             }
         },
-        validator(num){
+        validate(num){
             if(Number(num)===Number(num)){
                 if((num >= this.min)&&(num <= this.max)){
                     return true
@@ -94,13 +94,13 @@ export default { //输出
     },
     watch: {
         value(val){
-            if(this.validator(val)){
+            if(this.validate(val)){
                 this.myValue = Number(val);
             }
         }
     },
     created() {
-        if(this.validator(this.value)){
+        if(this.validate(this.value)){
             this.myValue = Number(this.value);
         }else{
             this.myValue = this.min;

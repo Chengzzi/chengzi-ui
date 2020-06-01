@@ -1,5 +1,5 @@
 <template>
-    <div class="cz-select-option" :class="{selected}" @click="select">
+    <div class="cz-select-option" :class="{selected,disabled}" @click="select">
     	<span :title="label">{{label}}</span>
     	<cz-icon name="xuanze" v-if="selected"></cz-icon>
     </div>
@@ -9,11 +9,16 @@
         name: "cz-select-option", 
         inject:["eventBus"],
         props:{
-            label:{},
+            label:{
+                type:[String,Number]
+            },
             value:{
                 type:[String,Number]
             },
-            name:{},
+            disabled:{
+                type:Boolean,
+                default:false
+            },
         },
         data(){
         	return{
@@ -22,16 +27,19 @@
         },
         created(){
         	this.eventBus.$on("update:selected",(data)=>{
-        		if(Array.isArray(data)){
-        			this.selected = (data.includes(this.value));
+                let value = this.value || this.label;
+                if(Array.isArray(data)){
+        			this.selected = (data.includes(value));
         		}else{
-        			this.selected = (data === this.value);
+        			this.selected = (data === value);
         		}
             })
         },
         methods:{
         	select(){
-        		this.eventBus.$emit("select",this.value);
+                if(this.disabled) return
+                let value = this.value || this.label;
+        		this.eventBus.$emit("select",{value:value,label:this.label});
         	}
         }
     };
@@ -64,6 +72,11 @@
 .selected,.selected:hover{
 	color: #e6a23c;
 	font-weight: bold;
+}
+
+.cz-select-option.disabled{
+    cursor: not-allowed;
+    color: #c0c4cc;
 }
 
 </style>
