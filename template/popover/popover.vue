@@ -67,6 +67,13 @@ export default { //输出
             }
         }
     },
+    beforeDestroy() {
+        if(this.popShow){
+            // 组件关闭前先销毁pop
+            this.popShow = false;
+            this.$refs.popContent.remove();
+        } 
+    },
     destroyed() {
         //在组件关闭时候消除监听，避免内存泄露
         document.body.removeEventListener("click",this.documentClick);
