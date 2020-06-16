@@ -57,7 +57,7 @@
 	width: 100%;
 	overflow: hidden;
 }
-.cz-select-option>.icon{
+.cz-select-option>.cz-icon{
 	position: absolute;
 	top: calc(50% - 2px);
     right: 5px;

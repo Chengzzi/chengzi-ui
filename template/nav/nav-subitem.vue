@@ -98,7 +98,7 @@ export default { //输出
             Velocity(
                 el, 
                 { height: this.childHeight,opacity: 1}, 
-                { duration: 300 }, 
+                { duration: 200 }, 
                 { complete: done },
                 "linear"
             );
@@ -113,7 +113,7 @@ export default { //输出
             }
             Velocity(el, 
                 { height: 0,opacity: 0},
-                { duration: 300 }, 
+                { duration: 200 }, 
                 { complete: done },
                 "linear"
             );

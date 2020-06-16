@@ -6,7 +6,6 @@ Desktop.ini
 template/tabs/myselfs/
 
 node_modules
-/dist
 .DS_Store
 
 # local env files

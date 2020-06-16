@@ -1,8 +1,8 @@
 <template>
-    <div v-show="!pageHide" class="cz-pagination" :class="{background}">
+    <div v-show="!pageHide" class="cz-pagination" :class="{background,disabled}">
         <cz-button 
         icon="left" 
-        :disabled="prevAbled" 
+        :disabled="prevDisbled||disabled" 
         size="mini"
         v-if="layout.includes('prev')"
         @click="btnClick('prev')">
@@ -21,7 +21,7 @@
         <cz-button 
         icon="right" 
         i-position="right" 
-        :disabled="nextAbled" 
+        :disabled="nextDisabled||disabled"  
         size="mini" 
         v-if="layout.includes('next')"
         @click="btnClick('next')">
@@ -77,6 +77,10 @@
                 default(){
                     return ["prev","next","jumper"]
                 },
+            },
+            disabled:{
+                type:Boolean,
+                default:false
             }
         },  
         data(){
@@ -86,6 +90,7 @@
         },
         methods:{
             btnClick(val){
+                if(this.disabled) return 
                 if(val === "prev"){
                     this.moveTo(this.currentPage-1);
                 }else if(val === "next"){
@@ -93,6 +98,7 @@
                 }
             },
             numberClick(val){
+                if(this.disabled) return 
                 if(typeof val === "number"){
                     this.moveTo(val);
                 }else{
@@ -152,10 +158,10 @@
             this.pageInit();
         },
         computed: {
-            nextAbled(){
+            nextDisabled(){
                 return this.currentPage === this.totle
             },
-            prevAbled(){
+            prevDisbled(){
                 return this.currentPage === 1
             },
             pageHide(){
@@ -167,6 +173,7 @@
 
 <style scoped>
 .cz-pagination{
+    text-align: center;
 }
 .cz-pager{
     user-select: none;
@@ -197,17 +204,19 @@
 .background .cz-pager-number{
     background-color: #f4f4f5;
 }
-.cz-pager-number:hover,
+.cz-pagination:not(.disabled) .cz-pager-number:hover,
 .cz-pager-number.active{
     color: #FF9500;
 }
+.disabled .cz-pager-number{
+    cursor: not-allowed;
+}
 .background .cz-pager-number.active{
     background: #FF9500;
-    color: #fff;
+    color: #fff!important;
 }
-
-.cz-pager-number.prev-more:hover:before,
-.cz-pager-number.next-more:hover:before{
+.cz-pagination:not(.disabled) .cz-pager-number.prev-more:hover:before,
+.cz-pagination:not(.disabled) .cz-pager-number.next-more:hover:before{
     display: block;
     height: 28px;
     position: absolute;
@@ -215,15 +224,15 @@
     left:50%;
     transform:translateX(-75%); 
 }
-.cz-pager-number.prev-more:hover:before{
+.cz-pagination:not(.disabled) .cz-pager-number.prev-more:hover:before{
     content: '《';
 }
-.cz-pager-number.next-more:hover:before{
+.cz-pagination:not(.disabled) .cz-pager-number.next-more:hover:before{
     content: '》';
     transform:translateX(-25%); 
 }
-.cz-pager-number.prev-more:hover>span,
-.cz-pager-number.next-more:hover>span{
+.cz-pagination:not(.disabled) .cz-pager-number.prev-more:hover>span,
+.cz-pagination:not(.disabled) .cz-pager-number.next-more:hover>span{
     display: none;
 }
 .cz-pagination >>> .cz-button{

@@ -180,10 +180,10 @@
     cursor: not-allowed;
     opacity: 0.6;
 }
-.cz-button >>> .icon{
+.cz-button >>> .cz-icon{
     order: -1;
 }
-.cz-button.right >>> .icon{
+.cz-button.right >>> .cz-icon{
     order: 1;
 }
 </style>

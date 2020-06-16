@@ -26,6 +26,18 @@ import Nav from './template/nav/nav.vue'
 import NavItem from './template/nav/nav-item.vue'
 import NavSubitem from './template/nav/nav-subitem.vue'
 import Counter from './template/counter/counter.vue'
+import Carousel from './template/carousel/carousel.vue'
+import CarouselItem from './template/carousel/carousel-item.vue'
+import Waterfall from './template/waterfall/waterfall.vue'
+import WaterfallItem from './template/waterfall/waterfall-item.vue'
+import Select from './template/select/select.vue'
+import SelectOption from './template/select/select-option.vue'
+import Checkbox from './template/checkbox/checkbox.vue'
+import CheckboxGroup from './template/checkbox/checkbox-group.vue'
+import Radio from './template/radio/radio.vue'
+import RadioGroup from './template/radio/radio-group.vue'
+import Pagination from './template/pagination/pagination.vue'
+import Table from './template/table/table.vue'
 
 import notifyPlugin from './template/notify/notifyPlugin.js'
 
@@ -54,6 +66,18 @@ const chengziUI = {
     Vue.component('cz-nav-item', NavItem);
     Vue.component('cz-nav-subitem', NavSubitem);
     Vue.component('cz-counter', Counter);
+    Vue.component('cz-carousel', Carousel);
+    Vue.component('cz-carousel-item', CarouselItem);
+    Vue.component('cz-waterfall', Waterfall);
+    Vue.component('cz-waterfall-item', WaterfallItem);
+    Vue.component('cz-select', Select);
+    Vue.component('cz-select-option', SelectOption);
+    Vue.component('cz-checkbox', Checkbox);
+    Vue.component('cz-checkbox-group', CheckboxGroup);
+    Vue.component('cz-radio', Radio);
+    Vue.component('cz-radio-group', RadioGroup);
+    Vue.component('cz-pagination', Pagination);
+    Vue.component('cz-table', Table);
 
     Vue.prototype.$czNotify = notifyPlugin(Vue);
   }
