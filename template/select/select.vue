@@ -12,7 +12,7 @@
             <template #content>
                 <div class="options" ref="options">
                     <div v-if="allSelect" class="allSelect">
-                        <cz-checkbox @change="allSelectClick" v-model="allSelected" label="全选"></cz-checkbox>
+                        <cz-checkbox ref="checkAll" @change="allSelectClick" v-model="allSelected" label="全选"></cz-checkbox>
                     </div>
                     <slot></slot>
                 </div>
@@ -62,7 +62,8 @@
                 eventBus: new Vue(),
                 optionGroup:[],
                 labelGroup:{},
-                allSelected:false
+                allSelected:false,
+                indeterminate:false,
             }
         },
         provide() {
@@ -85,6 +86,7 @@
                     }else{
                         selectArray.push(data.value);
                     }
+                    this.setIndeterminate(selectArray);
                     this.sendBus(selectArray);
                 }else{
                     if(data.value == this.value) return
@@ -118,6 +120,10 @@
                 }else{
                     this.sendBus([]);
                 }
+                this.setIndeterminate([]);
+            },
+            setIndeterminate(arr){
+                this.indeterminate = (arr.length!==0)&&(arr.length !== this.optionGroup.length);
             },
             selectInit(){
                 this.optionGroup = [];
@@ -136,11 +142,11 @@
                     this.value.forEach((item,index)=>{
                         if(this.optionGroup.includes(item)) arr.push(item)
                     })
-                    if(arr.length>0){
-                        this.sendBus(arr,true);
-                    }else{
-                        this.sendBus([this.optionGroup[0]],true);
+                    if(arr.length<1){
+                        arr = [this.optionGroup[0]];
                     }
+                    this.setIndeterminate(arr);
+                    this.sendBus(arr,true);
                 }else {
                     if(!this.optionGroup.includes(this.value)){
                         this.sendBus(this.optionGroup[0],true);
@@ -179,7 +185,10 @@
                 if(this.allSelect&&this.multiple&&this.optionGroup&&this.optionGroup.length>0){
                     this.allSelected = (val.length == this.optionGroup.length);
                 }
-            }
+            },
+            indeterminate(val){
+                if(this.allSelect) this.$refs.checkAll.setIndeterminate(val);
+            },
         }
     };
 </script>
