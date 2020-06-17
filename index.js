@@ -39,7 +39,7 @@ import RadioGroup from './template/radio/radio-group.vue'
 import Pagination from './template/pagination/pagination.vue'
 import Table from './template/table/table.vue'
 
-import notifyPlugin from './template/notify/notifyPlugin.js'
+import notify from './template/notify/notifyPlugin.js'
 
 const chengziUI = {
   install: function (Vue) {
@@ -79,7 +79,7 @@ const chengziUI = {
     Vue.component('cz-pagination', Pagination);
     Vue.component('cz-table', Table);
 
-    Vue.prototype.$czNotify = notifyPlugin(Vue);
+    Vue.prototype.$czNotify = notify(Vue);
   }
 }
 
