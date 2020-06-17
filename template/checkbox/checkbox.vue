@@ -1,7 +1,7 @@
 <template>
     <div class="cz-checkbox" :class="{checked,disabled}" @click="checkClick">
-        <input class="real-box" :name="name" type="checkbox" :disabled="disabled" :checked="checked">
-        <span class="show-box"></span>
+        <input class="real-box" :name="name" ref="checkBox" type="checkbox" :disabled="disabled" :checked="checked">
+        <span class="show-box" :class="{indeterminate}"></span>
         <span class="label">{{label}}</span>
     </div>
 </template>
@@ -34,7 +34,8 @@
         data(){
             return{
                 checked:false,
-                isGroup:false
+                isGroup:false,
+                indeterminate:false,
             }
         },
         methods:{
@@ -47,6 +48,10 @@
                     this.$emit("change",!this.checked);
                     this.$emit("input",!this.checked);
                 }
+            },
+            setIndeterminate(val){
+                this.indeterminate = val;
+                this.$refs.checkBox.indeterminate = val;
             }
         },
         created(){
@@ -112,6 +117,14 @@
     height: 4px;
     opacity: 1;
 }
+.indeterminate.show-box:after{
+    width: 6px;
+    border-bottom: 2px solid #fff;
+    transform: translate(-50%,-50%);    
+    height: 0px;
+    opacity: 1;
+}
+.indeterminate.show-box,
 .checked .show-box{
     border: 1px solid #FF9500;
     background: #FF9500;
@@ -129,6 +142,10 @@
     background: #F2F6FC;
 }
 .checked.disabled .show-box:after{
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+.disabled .indeterminate.show-box:after{
     border-left: 1px solid #999;
     border-bottom: 1px solid #999;
 }
