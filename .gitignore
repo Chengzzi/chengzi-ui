@@ -3,6 +3,7 @@ ehthumbs.db
 Desktop.ini
 dist
 
+.npmignore
 template/tabs/myselfs/
 
 node_modules
