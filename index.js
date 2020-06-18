@@ -41,6 +41,8 @@ import Table from './template/table/table.vue'
 
 import notify from './template/notify/notifyPlugin.js'
 
+import ClickOut from './template/clickOut/clickOut.js'
+
 const chengziUI = {
   install: function (Vue) {
     Vue.component('cz-icon', Icon);
@@ -80,6 +82,8 @@ const chengziUI = {
     Vue.component('cz-table', Table);
 
     Vue.prototype.$czNotify = notify(Vue);
+
+    Vue.directive("click-out",ClickOut);
   }
 }
 

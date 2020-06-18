@@ -49,7 +49,7 @@
                     this.$emit("input",!this.checked);
                 }
             },
-            setIndeterminate(val){
+            setIndeterminate(val=true){
                 this.indeterminate = val;
                 this.$refs.checkBox.indeterminate = val;
             }
