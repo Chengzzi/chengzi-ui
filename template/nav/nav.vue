@@ -139,9 +139,9 @@ export default { //输出
     width: 100%;
     position: relative;
 }
-.cz-nav>>> >div:not(.line){
-    /*padding: 10px 16px;*/
-}
+/* .cz-nav>>> >div:not(.line){
+    padding: 10px 16px;
+} */
 .cz-nav .line{
     position: absolute;
     margin-top: -1px;

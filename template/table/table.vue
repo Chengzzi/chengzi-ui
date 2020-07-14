@@ -8,7 +8,7 @@
                             <input class="cz-table-check-box" type="checkBox"  @change="checkAllClick($event)" ref="checkAll">
                         </th>
                         <th v-if="rowIndex" style="width:40px;">序号</th>
-                        <th v-for="item,index in czColumns" :style="{width:item.width || 'auto'}">
+                        <th v-for="(item,index) in czColumns" :key="index" :style="{width:item.width || 'auto'}">
                             {{item.text}}
                             <div v-if="item.field in orderRules" class="sort-btn" @click="sortBtnClick(item.field)">
                                 <cz-icon :class="{active:orderRules[item.field]==='asc'}" name="xiangshang1"></cz-icon> 
@@ -18,13 +18,16 @@
                     </tr>
                 </thead>
                 <tbody ref="tbody" class="cz-table-body">
-                    <template v-for="item,index in czTableData">    
-                        <tr class="main-tr" :key="item.id" @click="trClick(item,index,$event)":class="{selected:item.id === selectedId}">
+                    <template v-for="(item,index) in czTableData">    
+                        <tr class="main-tr" :key="item.id" @click="trClick(item,index,$event)" :class="{selected:item.id === selectedId}">
                             <td v-if="checked" style="width:20px;">
                                 <input class="cz-table-check-box" type="checkBox" @change="checkClick(item,index,$event)" :checked="isChecked(item.id)">
                             </td>
                             <td v-if="rowIndex" style="width:40px;">{{index}}</td>
-                            <td v-for="column,index in czColumns" :style="{width:column.width || 'auto'}">{{item[column.field]}}
+                            <td v-for="(column,index) in czColumns" :key="index" :style="{width:column.width || 'auto'}" >
+                                <slot :name="column.field" :rowData="item">
+                                    {{item[column.field]}}
+                                </slot>
                                 <span class="tr-expend-i" v-if="index===czColumns.length-1&&item.children&&item.children.length>0" @click="expendChild(item.id)"> 
                                     <cz-icon v-if="expendIds.includes(item.id)" name="down"></cz-icon>
                                     <cz-icon v-else name="right"></cz-icon> 
@@ -32,10 +35,10 @@
                             </td>
                             
                         </tr>
-                        <tr class="child-tr" v-if="expendIds.includes(item.id)" v-for="childItem,index in item.children" :key="`child${childItem.id}`">
+                        <tr class="child-tr" v-if="expendIds.includes(item.id)" v-for="childItem in item.children" :key="`child${childItem.id}`">
                             <td v-if="checked" style="width:20px;"></td>
                             <td v-if="rowIndex" style="width:20px;"></td>
-                            <td v-for="column in czColumns" :style="{width:column.width || 'auto'}">{{childItem[column.field]}}</td>
+                            <td v-for="(column,index) in czColumns" :style="{width:column.width || 'auto'}" :key="index">{{childItem[column.field]}}</td>
                         </tr>
                     </template>
                 </tbody>

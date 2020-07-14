@@ -1,6 +1,6 @@
 {
   "name": "chengzi-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a front UI frame by ChengZzi",
   "main": "dist/chengzi-ui.umd.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chengzzi/chengziUI.git"
+    "url": "git+https://github.com/Chengzzi/chengzi-ui.git"
   },
   "author": "ChengZzi",
   "license": "MIT",
@@ -21,9 +21,9 @@
     "vue"
   ],
   "bugs": {
-    "url": "https://github.com/Chengzzi/chengziUI/issues"
+    "url": "https://github.com/Chengzzi/chengzi-ui/issues"
   },
-  "homepage": "https://github.com/Chengzzi/chengziUI#readme",
+  "homepage": "https://github.com/Chengzzi/chengzi-ui#readme",
   "dependencies": {
     "velocity-animate": "^1.2.3"
   }
