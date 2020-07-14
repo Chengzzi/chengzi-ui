@@ -41,6 +41,12 @@
                             <td v-for="(column,index) in czColumns" :style="{width:column.width || 'auto'}" :key="index">{{childItem[column.field]}}</td>
                         </tr>
                     </template>
+                    <tr v-if="czTableData.length === 0">
+                        <td v-for="(column,index) in czColumns" :key="index" :style="{width:column.width || 'auto'}" >
+                            暂无数据
+                        </td>
+                        <!-- <td :colspan="czColumns.length">1</td> -->
+                    </tr>
                 </tbody>
             </table>
         </div>
