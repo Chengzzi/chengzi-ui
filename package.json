@@ -1,6 +1,6 @@
 {
   "name": "chengzi-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a front UI frame by ChengZzi",
   "main": "dist/chengzi-ui.umd.js",
   "directories": {

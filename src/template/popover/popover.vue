@@ -108,6 +108,7 @@ export default { //输出
         },
         popClick(e) {
             //contains用于检查是否包含后代node
+            console.log(this.$refs.popTrigger);
             if (this.$refs.popTrigger.contains(e.target)) {
                 if (this.popShow) {
                     this.clickClose();

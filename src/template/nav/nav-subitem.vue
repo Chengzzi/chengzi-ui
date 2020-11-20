@@ -9,12 +9,11 @@
         
         <transition 
             appear
-            v-on:appear="appear"
-            v-on:appear-cancelled="appearCancelled"
-            v-on:before-enter="beforeEnter"
-            v-on:enter="enter"
-            v-on:before-leave="beforeLeave"
-            v-on:leave="leave"
+            @appear="appear"
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @before-leave="beforeLeave"
+            @leave="leave"
             v-bind:css="false"
             :name="mode">
                 <div ref="childItem" class="childItem" v-show="spread">
@@ -90,7 +89,6 @@ export default { //输出
             this.childHeight = window.getComputedStyle(el).height;
             el.style.opacity = 1;
         },
-        appearCancelled(el) {},
         beforeEnter(el) {
             el.style.opacity = 0;
         },
@@ -114,8 +112,10 @@ export default { //输出
             Velocity(el, 
                 { height: 0,opacity: 0},
                 { duration: 200 }, 
-                { complete: done },
                 "linear"
+            );
+            Velocity(el, 
+                { complete: done }
             );
         }
     },

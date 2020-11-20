@@ -31,11 +31,8 @@
         name: "cz-select", 
         props:{
             width:{
-                type:Number,
+                type: [Number,String],
                 default:200,
-                validator(value) { //输入值合法检查
-                    return value > 0;
-                }
             },
             multiple:{
                 type:Boolean,
@@ -128,8 +125,8 @@
             selectInit(){
                 this.optionGroup = [];
                 this.labelGroup = {};
-                this.$refs.select.style.width = this.width+"px";
-                this.$refs.options.style.width = (this.width-2)+"px";
+                this.$refs.select.style.width = this._dealPixel(this.width);
+                this.$refs.options.style.width = (parseFloat(this.width)-2)+"px";
 
                 this.$children[0].$children.forEach(item=>{
                     if(item.$options.name === "cz-select-option"){

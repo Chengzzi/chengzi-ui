@@ -1,90 +1,106 @@
 import 'velocity-animate'
-import './lib/iconFont/iconfont.js'
-import './lib/iconFont/iconfont.css'
-import './css/commmon.css'
+import './src/lib/iconFont/iconfont.js'
+import './src/lib/iconFont/iconfont.css'
+import './src/css/commmon.css'
+import czMixins from './src/js/czmixins.js'
 
-import Button from './template/button/button.vue'
-import ButtonGroup from './template/button/button-group.vue'
-import Icon from './template/icon/icon.vue'
-import Row from './template/grid/row.vue'
-import Col from './template/grid/col.vue'
-import Popover from './template/popover/popover.vue'
-import Container from './template/layout/container.vue'
-import Header from './template/layout/header.vue'
-import Body from './template/layout/body.vue'
-import Sider from './template/layout/sider.vue'
-import Footer from './template/layout/footer.vue'
-import Tabs from './template/tabs/tabs.vue'
-import TabBody from './template/tabs/tab-body.vue'
-import TabPane from './template/tabs/tab-pane.vue'
-import TabHead from './template/tabs/tab-head.vue'
-import TabItem from './template/tabs/tab-item.vue'
-import Input from './template/input/input.vue'
-import Collapse from './template/collapse/collapse.vue'
-import CollapseItem from './template/collapse/collapse-item.vue'
-import Nav from './template/nav/nav.vue'
-import NavItem from './template/nav/nav-item.vue'
-import NavSubitem from './template/nav/nav-subitem.vue'
-import Counter from './template/counter/counter.vue'
-import Carousel from './template/carousel/carousel.vue'
-import CarouselItem from './template/carousel/carousel-item.vue'
-import Waterfall from './template/waterfall/waterfall.vue'
-import WaterfallItem from './template/waterfall/waterfall-item.vue'
-import Select from './template/select/select.vue'
-import SelectOption from './template/select/select-option.vue'
-import Checkbox from './template/checkbox/checkbox.vue'
-import CheckboxGroup from './template/checkbox/checkbox-group.vue'
-import Radio from './template/radio/radio.vue'
-import RadioGroup from './template/radio/radio-group.vue'
-import Pagination from './template/pagination/pagination.vue'
-import Table from './template/table/table.vue'
 
-import notify from './template/notify/notifyPlugin.js'
+import Button from './src/template/button/button.vue'
+import ButtonGroup from './src/template/button/button-group.vue'
+import Icon from './src/template/icon/icon.vue'
+import Row from './src/template/grid/row.vue'
+import Col from './src/template/grid/col.vue'
+import Popover from './src/template/popover/popover.vue'
+import Container from './src/template/layout/container.vue'
+import Header from './src/template/layout/header.vue'
+import Body from './src/template/layout/body.vue'
+import Sider from './src/template/layout/sider.vue'
+import Footer from './src/template/layout/footer.vue'
+import Tabs from './src/template/tabs/tabs.vue'
+import TabBody from './src/template/tabs/tab-body.vue'
+import TabPane from './src/template/tabs/tab-pane.vue'
+import TabHead from './src/template/tabs/tab-head.vue'
+import TabItem from './src/template/tabs/tab-item.vue'
+import Input from './src/template/input/input.vue'
+import Collapse from './src/template/collapse/collapse.vue'
+import CollapseItem from './src/template/collapse/collapse-item.vue'
+import Nav from './src/template/nav/nav.vue'
+import NavItem from './src/template/nav/nav-item.vue'
+import NavSubitem from './src/template/nav/nav-subitem.vue'
+import Counter from './src/template/counter/counter.vue'
+import Carousel from './src/template/carousel/carousel.vue'
+import CarouselItem from './src/template/carousel/carousel-item.vue'
+import Waterfall from './src/template/waterfall/waterfall.vue'
+import WaterfallItem from './src/template/waterfall/waterfall-item.vue'
+import Select from './src/template/select/select.vue'
+import SelectOption from './src/template/select/select-option.vue'
+import Checkbox from './src/template/checkbox/checkbox.vue'
+import CheckboxGroup from './src/template/checkbox/checkbox-group.vue'
+import Radio from './src/template/radio/radio.vue'
+import RadioGroup from './src/template/radio/radio-group.vue'
+import Pagination from './src/template/pagination/pagination.vue'
+import Table from './src/template/table/table.vue'
+import Panel from './src/template/panel/panel.vue'
+import Modal from './src/template/modal/modal.vue'
 
-import ClickOut from './template/clickOut/clickOut.js'
+
+import notify from './src/template/notify/notifyPlugin.js'
+
+import ClickOut from './src/template/clickOut/clickOut.js'
 
 const chengziUI = {
-  install: function (Vue) {
-    Vue.component('cz-icon', Icon);
-    Vue.component('cz-button', Button);
-    Vue.component('cz-button-group', ButtonGroup);
-    Vue.component('cz-input', Input);
-    Vue.component('cz-row', Row);
-    Vue.component('cz-col', Col);
-    Vue.component('cz-popover', Popover);
-    Vue.component('cz-container', Container);
-    Vue.component('cz-body', Body);
-    Vue.component('cz-header', Header);
-    Vue.component('cz-sider', Sider);
-    Vue.component('cz-footer', Footer);
-    Vue.component('cz-tabs', Tabs);
-    Vue.component('cz-tab-body', TabBody);
-    Vue.component('cz-tab-pane', TabPane);
-    Vue.component('cz-tab-head', TabHead);
-    Vue.component('cz-tab-item', TabItem);
-    Vue.component('cz-collapse', Collapse);
-    Vue.component('cz-collapse-item', CollapseItem);
-    Vue.component('cz-nav', Nav);
-    Vue.component('cz-nav-item', NavItem);
-    Vue.component('cz-nav-subitem', NavSubitem);
-    Vue.component('cz-counter', Counter);
-    Vue.component('cz-carousel', Carousel);
-    Vue.component('cz-carousel-item', CarouselItem);
-    Vue.component('cz-waterfall', Waterfall);
-    Vue.component('cz-waterfall-item', WaterfallItem);
-    Vue.component('cz-select', Select);
-    Vue.component('cz-select-option', SelectOption);
-    Vue.component('cz-checkbox', Checkbox);
-    Vue.component('cz-checkbox-group', CheckboxGroup);
-    Vue.component('cz-radio', Radio);
-    Vue.component('cz-radio-group', RadioGroup);
-    Vue.component('cz-pagination', Pagination);
-    Vue.component('cz-table', Table);
+    install: function(Vue) {
+        let components = [
+            { name: "cz-icon", module: Icon },
+            { name: "cz-button", module: Button },
+            { name: "cz-button-group", module: ButtonGroup },
+            { name: "cz-input", module: Input },
+            { name: "cz-row", module: Row },
+            { name: "cz-col", module: Col },
+            { name: "cz-popover", module: Popover },
+            { name: "cz-container", module: Container },
+            { name: "cz-body", module: Body },
+            { name: "cz-header", module: Header },
+            { name: "cz-sider", module: Sider },
+            { name: "cz-footer", module: Footer },
+            { name: "cz-tabs", module: Tabs },
+            { name: "cz-tab-body", module: TabBody },
+            { name: "cz-tab-pane", module: TabPane },
+            { name: "cz-tab-head", module: TabHead },
+            { name: "cz-tab-item", module: TabItem },
+            { name: "cz-collapse", module: Collapse },
+            { name: "cz-collapse-item", module: CollapseItem },
+            { name: "cz-nav", module: Nav },
+            { name: "cz-nav-item", module: NavItem },
+            { name: "cz-nav-subitem", module: NavSubitem },
+            { name: "cz-counter", module: Counter },
+            { name: "cz-carousel", module: Carousel },
+            { name: "cz-carousel-item", module: CarouselItem },
+            { name: "cz-waterfall", module: Waterfall },
+            { name: "cz-waterfall-item", module: WaterfallItem },
+            { name: "cz-select", module: Select },
+            { name: "cz-select-option", module: SelectOption },
+            { name: "cz-checkbox", module: Checkbox },
+            { name: "cz-checkbox-group", module: CheckboxGroup },
+            { name: "cz-radio", module: Radio },
+            { name: "cz-radio-group", module: RadioGroup },
+            { name: "cz-pagination", module: Pagination },
+            { name: "cz-table", module: Table },
+            { name: "cz-panel", module: Panel },
+            { name: "cz-modal", module: Modal },
+        ]
+        components.forEach(item => {
+            item.module.mixins = [czMixins]
+            Vue.component(item.name, item.module);
+        })
 
-    Vue.prototype.$czNotify = notify(Vue);
 
-    Vue.directive("click-out",ClickOut);
-  }
+        Vue.prototype.$czNotify = notify(Vue);
+
+        // Vue.mixin(czMixins);
+
+        Vue.directive("click-out", ClickOut);
+    }
 }
 
 export default chengziUI;

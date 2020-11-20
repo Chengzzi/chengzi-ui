@@ -23,7 +23,7 @@
         ref="textarea"  
         v-if="type=='textarea'" 
         :maxlength="maxlength" 
-        :minlength="maxlength" 
+        :minlength="minlength" 
         :disabled="disabled" 
         :readonly="readonly" 
         :placeholder="placeholder" 
@@ -133,9 +133,6 @@ export default { //输出
             }
         }
     },
-    created() {
-
-    },
     mounted() {
         let el = this.$refs.textarea;
         if(el && typeof this.autosize === "object"){
@@ -154,8 +151,9 @@ export default { //输出
             }
         },
         inputStyle(){
+            let width = this._dealPixel(this.width);
             return {
-                width:this.width? this.width+"px": "100%"
+                width
             }
         }
     },

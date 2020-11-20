@@ -23,7 +23,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 .cz-button-group{
     display: inline-block;
 }

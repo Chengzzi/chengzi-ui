@@ -110,7 +110,7 @@ export default { //输出
     },
 };
 </script>
-<style>
+<style scoped>
 .cz-counter{
     display: inline-block;
     position:relative;

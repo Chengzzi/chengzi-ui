@@ -35,7 +35,7 @@
                             </td>
                             
                         </tr>
-                        <tr class="child-tr" v-if="expendIds.includes(item.id)" v-for="childItem in item.children" :key="`child${childItem.id}`">
+                        <tr class="child-tr" v-show="expendIds.includes(item.id)" v-for="childItem in item.children" :key="`child${childItem.id}`">
                             <td v-if="checked" style="width:20px;"></td>
                             <td v-if="rowIndex" style="width:20px;"></td>
                             <td v-for="(column,index) in czColumns" :style="{width:column.width || 'auto'}" :key="index">{{childItem[column.field]}}</td>
