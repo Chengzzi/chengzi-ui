@@ -13,21 +13,6 @@ export default { //输出
             }
         }
     },
-    props: {
-        title: {
-            default:"title",
-            type: String,
-        },
-    },
-    computed: {
-
-    },
-    watch: {
-       
-    },
-    created() {
-
-    },
     mounted() {
         this.$children.forEach(vm=>{
             let typeList = ["cz-sider","cz-header","cz-body","cz-footer","cz-container"]
@@ -38,11 +23,6 @@ export default { //输出
                 this.containerClass.hasSider = true;
             }
         })
-    },
-    methods: {
-        clickme(childData){
-           
-        }
     }
 };
 </script>

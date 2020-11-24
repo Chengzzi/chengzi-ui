@@ -4,32 +4,9 @@
     </div>
 </template>
 <script>
-export default { //输出
-    name: "cz-sider", 
-    data() {
-        return {
-        }
-    },
-    props: {
-        title: {
-            default:"",
-            type: String,
-        },
-    },
-    computed: {
-
-    },
-    created() {
-
-    },
-    mounted() {
-
-    },
-    methods: {
-
-    } //传元素属性值
+export default {
+    name: "cz-sider",
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
