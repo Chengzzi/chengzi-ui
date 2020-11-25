@@ -108,7 +108,6 @@ export default { //输出
         },
         popClick(e) {
             //contains用于检查是否包含后代node
-            console.log(this.$refs.popTrigger);
             if (this.$refs.popTrigger.contains(e.target)) {
                 if (this.popShow) {
                     this.clickClose();
@@ -169,6 +168,7 @@ export default { //输出
     border: 1px solid #EBEEF5;
     border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(188,188,188,.6), 0 2px 3px 0 rgba(188,188,188,.5);
+    z-index: 998;
 }
 .pop-content.selectPop{
     padding: 0;
