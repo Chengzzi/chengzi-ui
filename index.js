@@ -90,6 +90,7 @@ const chengziUI = {
             { name: "cz-modal", module: Modal },
         ]
         components.forEach(item => {
+            // 部分混入
             item.module.mixins = [czMixins]
             Vue.component(item.name, item.module);
         })
@@ -97,7 +98,8 @@ const chengziUI = {
 
         Vue.prototype.$czNotify = notify(Vue);
 
-        // Vue.mixin(czMixins);
+        // 全局混入
+        // Vue.mixin(czMixins); 
 
         Vue.directive("click-out", ClickOut);
     }

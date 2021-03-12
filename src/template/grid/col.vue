@@ -49,7 +49,7 @@ export default { //输出
     } //传元素属性值
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @for $n from 1 through 24 {
     .cz-col.col-#{$n} {
         width: ($n/24) * 100%;

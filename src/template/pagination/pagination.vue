@@ -132,9 +132,7 @@ export default {
             arr.sort((a, b) => {
                 return a - b;
             });
-            console.log(arr);
             this.pages = this.unique(arr);
-            console.log(this.pages);
         },
         unique(arr) {
             let obj = {};
@@ -145,7 +143,6 @@ export default {
                 return parseInt(item);
             });
             // or let rawData =  [...new Set(arr)];
-            console.log(rawData);
             let pages = rawData.reduce((prev, current, index, array) => {
                 // prev = 传入的[],current=当前项,index=序号,array = rawData
                 if (current >= 1 && current <= this.totle) {
